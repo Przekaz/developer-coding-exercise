@@ -1,3 +1,5 @@
+const removeMd = require('remove-markdown');
+
 const stopWords = [
   '#', '##', 'a', 'about', 'above', 'after', 'again', 'against', 'all', 'am',
   'an', 'and', 'any', 'are', 'aren\'t', 'as', 'at', 'be', 'because', 'been',
@@ -30,7 +32,23 @@ const stopWords = [
  * @returns {[string]} - An array of the most frequently used non-Stopwords
  */
 function getTopWords (bodyText, tagCount = 5) {
-  // Write your own implementation
+  let wordCountMap = { };
+  let wordsArray = removeMd(bodyText).toLowerCase().replace(/[\s]/g, " ").replace(/[^a-z ]/g, "").split(/\s+/);
+  wordsArray.forEach(word => {
+    if (!stopWords.includes(word)) {
+      let key = "_" + word;
+      //usage of "_" allows handling of special keywords like constructor
+      if (wordCountMap.hasOwnProperty(key)) {
+        wordCountMap[key]++;
+      } else {
+        wordCountMap[key] = 1;
+      }
+    }
+  });
+  //console.log(wordCountMap);
+  const frequencyMap = Object.keys(wordCountMap).map(key => [key, wordCountMap[key]]);
+  frequencyMap.sort((a, b) => b[1] - a[1]);
+  return frequencyMap.slice(0, tagCount).map(el => el[0].replace("_", ""));
 }
 
 module.exports = { getTopWords }

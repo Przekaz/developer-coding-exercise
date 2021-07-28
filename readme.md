@@ -51,3 +51,21 @@ It's okay for this application to look very basic, though this is up to you. For
 * Please build the client in a Javascript client framework - e.g. Ember, React, Vue.js etc.
 * Don’t worry about styling/making the site look good. It purely needs to demonstrate that the javascript is consuming your API and turning the json into useful content on-screen.
 * We recommend you start by building the API to provide data to the client, but leave out the tags functionality initially.  Come back and complete the tags when the rest of the application is working and if you have the time.
+
+## Added by Przemek - How to run backend
+* cd express
+* npm start
+* backend will start on port 3001
+
+## Added by Przemek - How to run frontend
+* cd web
+* npm start
+* frontend will start on port 3000
+
+## Added by Przemek - Possible next steps
+* separation of concerns in the backend (MVC pattern), express router, body-parser for POST requests
+* database (i.e. sqlite) instead of MD files (MD files can be parsed and saved to DB on startup if needed)
+* more CRUD functionality, potentially with Sequelize and Epilogue
+* authentication (i.e. ExpressOIDC from OKTA), with home, admin and logout paths and express-session to manage state
+* better look & feel, CSS pre-processors in the front-end
+* environment variables
